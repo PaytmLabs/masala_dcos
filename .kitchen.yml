@@ -10,13 +10,8 @@ provisioner:
   client_rb:
     environment: kitchen
 
+# DC/OS only supports centos 7.x (and CoreOS)
 platforms:
-  - name: centos67
-    driver_config:
-      box: boxcutter/centos67
-    attributes:
-      system:
-        primary_interface: eth1
   - name: centos71
     driver_config:
       box: boxcutter/centos71
@@ -29,24 +24,6 @@ platforms:
     attributes:
       system:
         primary_interface: enp0s8
-  - name: ubuntu1404
-    driver_config:
-      box: boxcutter/ubuntu1404
-    attributes:
-      system:
-        primary_interface: eth1
-  - name: ubuntu1504
-    driver_config:
-      box: boxcutter/ubuntu1504
-    attributes:
-      system:
-        primary_interface: eth1
-  - name: debian82
-    driver_config:
-      box: boxcutter/debian82
-    attributes:
-      system:
-        primary_interface: eth1
 
 suites:
   - name: dcos-m
@@ -58,19 +35,20 @@ suites:
       network:
       - ["private_network", {ip: "10.10.10.11"}]
       customize:
-        memory: 3072
+        memory: 2048
         cpus: 1
     attributes:
       system:
         short_hostname: 'dcos-m'
         static_hosts:
           10.10.10.11: dcos-m.kitchen.masalatest.com
-          10.10.10.12: dcos-s.kitchen.masalatest.com
-          10.10.10.13: dcos-p.kitchen.masalatest.com
+          10.10.10.12: dcos-a1.kitchen.masalatest.com
+          10.10.10.13: dcos-a2.kitchen.masalatest.com
+          10.10.10.14: dcos-a3.kitchen.masalatest.com
       dcos:
         master_list: ['10.10.10.11']
         dcos_role: 'master'
-  - name: dcos-s
+  - name: dcos-a1
     run_list:
       - recipe[masala_dcos::default]
     driver:
@@ -83,15 +61,16 @@ suites:
         cpus: 1
     attributes:
       system:
-        short_hostname: 'dcos-s'
+        short_hostname: 'dcos-a1'
         static_hosts:
           10.10.10.11: dcos-m.kitchen.masalatest.com
-          10.10.10.12: dcos-s.kitchen.masalatest.com
-          10.10.10.13: dcos-p.kitchen.masalatest.com
+          10.10.10.12: dcos-a1.kitchen.masalatest.com
+          10.10.10.13: dcos-a2.kitchen.masalatest.com
+          10.10.10.14: dcos-a3.kitchen.masalatest.com
       dcos:
         master_list: ['10.10.10.11']
         dcos_role: 'slave'
-  - name: dcos-p
+  - name: dcos-a2
     run_list:
       - recipe[masala_dcos::default]
     driver:
@@ -104,11 +83,35 @@ suites:
         cpus: 1
     attributes:
       system:
-        short_hostname: 'dcos-p'
+        short_hostname: 'dcos-a2'
         static_hosts:
           10.10.10.11: dcos-m.kitchen.masalatest.com
-          10.10.10.12: dcos-s.kitchen.masalatest.com
-          10.10.10.13: dcos-p.kitchen.masalatest.com
+          10.10.10.12: dcos-a1.kitchen.masalatest.com
+          10.10.10.13: dcos-a2.kitchen.masalatest.com
+          10.10.10.14: dcos-a3.kitchen.masalatest.com
       dcos:
         master_list: ['10.10.10.11']
-        dcos_role: 'slave_public'
+        dcos_role: 'slave'
+  - name: dcos-a3
+    run_list:
+      - recipe[masala_dcos::default]
+    driver:
+      synced_folders:
+        - [".shared_data", "/shared", mount_options: ["dmode=777,fmode=666"]]
+      network:
+      - ["private_network", {ip: "10.10.10.14"}]
+      customize:
+        memory: 3072
+        cpus: 1
+    attributes:
+      system:
+        short_hostname: 'dcos-a3'
+        static_hosts:
+          10.10.10.11: dcos-m.kitchen.masalatest.com
+          10.10.10.12: dcos-a1.kitchen.masalatest.com
+          10.10.10.13: dcos-a2.kitchen.masalatest.com
+          10.10.10.14: dcos-a3.kitchen.masalatest.com
+      dcos:
+        master_list: ['10.10.10.11']
+        dcos_role: 'slave'
+
