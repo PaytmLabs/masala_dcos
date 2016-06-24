@@ -28,7 +28,7 @@ platforms:
 suites:
   - name: dcos-m
     run_list:
-      - recipe[masala_dcos::default]
+      - recipe[masala_dcos::master]
     driver:
       synced_folders:
         - [".shared_data", "/shared", mount_options: ["dmode=777,fmode=666"]]
@@ -47,10 +47,9 @@ suites:
           10.10.10.14: dcos-a3.kitchen.masalatest.com
       dcos:
         master_list: ['10.10.10.11']
-        dcos_role: 'master'
   - name: dcos-a1
     run_list:
-      - recipe[masala_dcos::default]
+      - recipe[masala_dcos::agent]
     driver:
       synced_folders:
         - [".shared_data", "/shared", mount_options: ["dmode=777,fmode=666"]]
@@ -69,10 +68,9 @@ suites:
           10.10.10.14: dcos-a3.kitchen.masalatest.com
       dcos:
         master_list: ['10.10.10.11']
-        dcos_role: 'slave'
   - name: dcos-a2
     run_list:
-      - recipe[masala_dcos::default]
+      - recipe[masala_dcos::agent]
     driver:
       synced_folders:
         - [".shared_data", "/shared", mount_options: ["dmode=777,fmode=666"]]
@@ -91,10 +89,9 @@ suites:
           10.10.10.14: dcos-a3.kitchen.masalatest.com
       dcos:
         master_list: ['10.10.10.11']
-        dcos_role: 'slave'
   - name: dcos-a3
     run_list:
-      - recipe[masala_dcos::default]
+      - recipe[masala_dcos::agent]
     driver:
       synced_folders:
         - [".shared_data", "/shared", mount_options: ["dmode=777,fmode=666"]]
@@ -113,5 +110,4 @@ suites:
           10.10.10.14: dcos-a3.kitchen.masalatest.com
       dcos:
         master_list: ['10.10.10.11']
-        dcos_role: 'slave'
 
