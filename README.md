@@ -1,27 +1,19 @@
 # masala_dcos-cookbook
 
-TODO: Enter the cookbook description here.
+This is a component of the [masala toolkit](https://github.com/PaytmLabs/masala).
+
+This is a [wrapper cookbook](http://blog.vialstudios.com/the-environment-cookbook-pattern/#thewrappercookbook) for providing recipes for Mesosphere DC/OS deployment.
 
 ## Supported Platforms
 
-TODO: List your supported platforms.
+The platforms supported are:
+- Centos 7.1+
 
 ## Attributes
 
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['masala_dcos']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+Please see the documentation for the cookbooks included by masala_dcos. (See [metadata.rb](https://github.com/PaytmLabs/masala_dcos/blob/develop/metadata.rb) file)
+
+This cookbook does not add any attributes of it's own.
 
 ## Usage
 
@@ -37,6 +29,10 @@ Include `masala_dcos` in your node's `run_list`:
 }
 ```
 
-## License and Authors
+## License, authors, and how to contribute
 
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+See:
+- [LICENSE](https://github.com/PaytmLabs/masala_spark/blob/develop/LICENSE)
+- [MAINTAINERS.md](https://github.com/PaytmLabs/masala_spark/blob/develop/MAINTAINERS.md)
+- [CONTRIBUTING.md](https://github.com/PaytmLabs/masala_spark/blob/develop/CONTRIBUTING.md)
+

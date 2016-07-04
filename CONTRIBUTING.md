@@ -50,5 +50,5 @@ This project makes use of [git-flow](https://github.com/nvie/gitflow).
 
 ### Testing workflow
 
-See: [TESTING.md](https://github.com/PaytmLabs/masala_elk/blob/develop/TESTING.md)
+See: [TESTING.md](https://github.com/PaytmLabs/masala_dcos/blob/develop/TESTING.md)
 
