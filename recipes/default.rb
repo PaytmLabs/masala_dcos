@@ -19,3 +19,13 @@
 include_recipe 'masala_base::default'
 include_recipe 'dcos::default'
 
+# If we have cloud-init installed, change dependencies w/ systemd to reflect this
+cookbook_file '/etc/systemd/system/dcos.target' do
+  source 'dcos.target'
+  owner 'root'
+  group node['root_group']
+  mode '0644'
+  action :create
+  only_if { ::File.exist? "/etc/cloud/cloud.cfg" }
+end
+

@@ -1,0 +1,5 @@
+[Unit]
+Requires=cloud-final.service
+After=cloud-final.service
+[Install]
+WantedBy=multi-user.target
