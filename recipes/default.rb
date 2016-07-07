@@ -28,13 +28,4 @@ cookbook_file '/etc/systemd/system/dcos.target' do
   action :create
   only_if { ::File.exist? "/etc/cloud/cloud.cfg" }
 end
-cookbook_file '/etc/systemd/system/dcos-vol-discovery-priv-agent.service' do
-  source 'dcos-vol-discovery-priv-agent.service'
-  owner 'root'
-  group node['root_group']
-  mode '0644'
-  action :create
-  only_if { ::File.exist? "/etc/cloud/cloud.cfg" }
-  only_if { node['dcos']['dcos_role'] != 'master' }
-end
 

@@ -19,3 +19,11 @@
 node.set['dcos']['dcos_role'] = 'slave_public'
 include_recipe 'masala_dcos::default'
 
+cookbook_file '/etc/systemd/system/dcos-vol-discovery-pub-agent.service' do
+  source 'dcos-vol-discovery-pub-agent.service'
+  owner 'root'
+  group node['root_group']
+  mode '0644'
+  action :create
+  only_if { ::File.exist? "/etc/cloud/cloud.cfg" }
+end
