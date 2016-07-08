@@ -1,6 +1,7 @@
 source "https://supermarket.chef.io"
 
 ## Due to a design decision in berkshelf to not recursively resolve dependencies, we must declare all dependencies of our dependencies, to the full depth of the recursion
+cookbook 'dcos', :git => 'https://github.com/PaytmLabs/chef-dcos-cookbook.git', :ref => 'ccampo-04-2016'
 
 # Dependencies of masala_ldap:
 cookbook 'openldap', :git => 'https://github.com/PaytmLabs/chef-openldap.git', :ref => 'feature-our-fixes'
