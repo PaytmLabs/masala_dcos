@@ -17,6 +17,31 @@
 # limitations under the License.
 
 include_recipe 'masala_base::default'
+
+# needed this if we need to pre-populate config here
+directory '/var/lib/dcos' do
+  owner 'root'
+  group node['root_group']
+  mode 0755
+end
+
+# setup http proxy if used
+if Chef::Config.has_key?(:http_proxy)
+
+  # TODO: not used yet, will be needed if auth on proxy comes up, and need injection to template
+  # mainly here to anchor dependency till we do
+  proxy = URI(Chef::Config[:http_proxy])
+
+  # different files for different dcos node types
+  fname = (node['dcos']['dcos_role'] == 'master') ? 'environment.proxy' : 'mesos-slave-common'
+  template "/var/lib/dcos/#{fname}" do
+    source  "proxy-config.erb"
+    owner 'root'
+    group node['root_group']
+    mode  00644
+  end
+end
+
 include_recipe 'dcos::default'
 
 # If we have cloud-init installed, change dependencies w/ systemd to reflect this
