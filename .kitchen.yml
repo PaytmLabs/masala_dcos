@@ -44,7 +44,6 @@ suites:
           10.10.10.11: dcos-m.kitchen.masalatest.com
           10.10.10.12: dcos-a1.kitchen.masalatest.com
           10.10.10.13: dcos-a2.kitchen.masalatest.com
-          10.10.10.14: dcos-a3.kitchen.masalatest.com
       dcos:
         master_list: ['10.10.10.11']
   - name: dcos-a1
@@ -65,7 +64,6 @@ suites:
           10.10.10.11: dcos-m.kitchen.masalatest.com
           10.10.10.12: dcos-a1.kitchen.masalatest.com
           10.10.10.13: dcos-a2.kitchen.masalatest.com
-          10.10.10.14: dcos-a3.kitchen.masalatest.com
       dcos:
         master_list: ['10.10.10.11']
   - name: dcos-a2
@@ -86,28 +84,6 @@ suites:
           10.10.10.11: dcos-m.kitchen.masalatest.com
           10.10.10.12: dcos-a1.kitchen.masalatest.com
           10.10.10.13: dcos-a2.kitchen.masalatest.com
-          10.10.10.14: dcos-a3.kitchen.masalatest.com
-      dcos:
-        master_list: ['10.10.10.11']
-  - name: dcos-a3
-    run_list:
-      - recipe[masala_dcos::agent]
-    driver:
-      synced_folders:
-        - [".shared_data", "/shared", mount_options: ["dmode=777,fmode=666"]]
-      network:
-      - ["private_network", {ip: "10.10.10.14"}]
-      customize:
-        memory: 3072
-        cpus: 1
-    attributes:
-      system:
-        short_hostname: 'dcos-a3'
-        static_hosts:
-          10.10.10.11: dcos-m.kitchen.masalatest.com
-          10.10.10.12: dcos-a1.kitchen.masalatest.com
-          10.10.10.13: dcos-a2.kitchen.masalatest.com
-          10.10.10.14: dcos-a3.kitchen.masalatest.com
       dcos:
         master_list: ['10.10.10.11']
 
