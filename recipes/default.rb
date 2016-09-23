@@ -54,3 +54,8 @@ cookbook_file '/etc/systemd/system/dcos.target' do
   only_if { ::File.exist? "/etc/cloud/cloud.cfg" }
 end
 
+file '/etc/profile.d/dcos.sh' do
+  action :delete
+  force_unlink true
+end
+
